@@ -13,3 +13,72 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+//criar uma migration: yarn prisma migrate dev --name init
+model User {
+  id String @id @default(uuid())
+  email String @unique
+  name String
+  password String
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
+
+  @@map("users")
+  // Relacionamento com os pedidos
+  
+}
+
+model Category {
+  id String @id @default(uuid())
+  name String
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
+
+  @@map("categories")
+  products Product[]
+}
+
+model Product {
+  id String @id @default(uuid())
+  name String
+  price String
+  description String
+  banner String
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
+
+  // Relacionamento com a categoria
+  category Category @relation(fields: [category_Id], references: [id])
+
+  @@map("products")
+  category_Id String // Relacionando com a categoria
+  items Item[] // Relacionamento com os itens do pedido
+}
+
+model Order {
+  id String @id @default(uuid())
+  table Int 
+  status Boolean @default(false) // status do pedido
+  draft Boolean @default(true) // rascunho
+  name String? // nome do cliente
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
+
+
+  @@map("orders")
+  items Item[]
+}
+
+model Item {
+  id String @id @default(uuid())
+  amount Int
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
+
+  // Relacionamento com o pedido
+  order Order @relation(fields: [order_Id], references: [id])
+  product Product @relation(fields: [product_Id], references: [id])
+  
+  @@map("items")
+  order_Id String // Relacionando com o pedido
+  product_Id String // Relacionando com o produto
+}
