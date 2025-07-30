@@ -1,5 +1,5 @@
 import prismaClient from "../../prisma"
-
+import {hash} from 'bcryptjs'
 
 interface UserRequest {
   name: string;
@@ -25,16 +25,18 @@ class CreateUserService {
       throw new Error("Usuário já cadastrado");
     }
 
+    // criptografar a senha
+    const passwordHash = await hash(password, 8);
+  
+
     // criar o usuário
     const user = await prismaClient.user.create({
       data: {
-        name,
-        email,
-        password
+        name: name,
+        email: email,
+        password: passwordHash
       },
       // selecionar os campos que queremos retornar
-      // para não retornar o password
-      // e não expor informações sensíveis
       select: {
         id: true,
         name: true,
