@@ -1,10 +1,11 @@
 import { Router, Request, Response } from 'express';
 
+import { CreateUserController } from './controllers/user/CreateUserController';
+
+
 
 const router = Router();
-
-router.get('/test', (req: Request, res: Response) => {
-  return res.json({ message: 'Rota de Testes!' });
-});
+//-- Rotas de Criacao de usuários
+router.post('/users', new CreateUserController().handle);
 
 export default router;
