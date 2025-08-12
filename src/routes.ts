@@ -9,7 +9,7 @@ import { IsAuthenticated } from './middlewares/Auth';
 
 //-- Importando o controlador de categoria
 import { CreateCategoryController } from './controllers/category/CreateCategoryController';
-
+import { ListCategoryController } from './controllers/category/ListCategoryController';
 
 const router = Router();
 
@@ -23,5 +23,7 @@ router.get('/me', IsAuthenticated, new DetailUserControler().handle);
 
 //-- Rota de criacao de categoria
 router.post('/category', IsAuthenticated, new CreateCategoryController().handle);
+//-- Rota de listagem de categorias
+router.get('/category', IsAuthenticated, new ListCategoryController().handle);
 
 export default router;  
