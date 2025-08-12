@@ -30,7 +30,7 @@ export function IsAuthenticated(
 
     )as IPayload; // O tipo de retorno é IPayload, que contém o ID do usuário
 
-    console.log(sub);
+    req.user_id = sub;
     return next();
 
   }catch (err) {
