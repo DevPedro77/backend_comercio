@@ -11,6 +11,9 @@ import { IsAuthenticated } from './middlewares/Auth';
 import { CreateCategoryController } from './controllers/category/CreateCategoryController';
 import { ListCategoryController } from './controllers/category/ListCategoryController';
 
+//-- Importando o controlador dos produtos
+import { CreateProductController } from './controllers/product/CreateProductController';
+
 const router = Router();
 
 //-- Rotas de Criacao de usuários
@@ -25,5 +28,8 @@ router.get('/me', IsAuthenticated, new DetailUserControler().handle);
 router.post('/category', IsAuthenticated, new CreateCategoryController().handle);
 //-- Rota de listagem de categorias
 router.get('/category', IsAuthenticated, new ListCategoryController().handle);
+
+//-- Rota de criacao de produto
+router.post("/product", IsAuthenticated, new CreateProductController().handle);
 
 export default router;  
