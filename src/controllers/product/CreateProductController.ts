@@ -9,7 +9,7 @@ class CreateProductController {
     if(!req.file){
       throw new Error("Error upload file")
     }else{
-      const{originalname, filename} = req.file;
+      const{originalname, filename: banner} = req.file;
 
       console.log(originalname)
 
@@ -17,7 +17,7 @@ class CreateProductController {
         name,
         price,
         description,
-        banner: "",
+        banner,
         category_id
       })
   
