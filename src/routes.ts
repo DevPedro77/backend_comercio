@@ -17,6 +17,7 @@ import { ListCategoryController } from './controllers/category/ListCategoryContr
 
 //-- Importando o controlador dos produtos
 import { CreateProductController } from './controllers/product/CreateProductController';
+import { ListProductController } from "../src/controllers/product/ListByCategoryController";
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./temp"));
@@ -36,5 +37,7 @@ router.get('/category', IsAuthenticated, new ListCategoryController().handle);
 
 //-- Rota de criacao de produto
 router.post("/product", IsAuthenticated, upload.single("file"), new CreateProductController().handle);
+//-- Rota de listar produtos por categoria
+router.get("/product/category", IsAuthenticated, new ListProductController().handle)
 
 export default router;  
