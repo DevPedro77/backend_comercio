@@ -21,6 +21,7 @@ import { ListProductController } from "../src/controllers/product/ListByCategory
 
 //-- Importando o controlador das Orders
 import {CreateOrderController} from "../src/controllers/order/CreateOrderController";
+import { DeleteOrderController } from './controllers/order/DeleteOrderController';
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./temp"));
@@ -45,5 +46,11 @@ router.get("/product/category", IsAuthenticated, new ListProductController().han
 
 //-- Rota de criacao de pedidos
 router.post("/order", IsAuthenticated, new CreateOrderController().handle)
+//-- Rota para deletar ordens
+router.delete("/order", IsAuthenticated, new DeleteOrderController().handle)
+
+
+
+
 
 export default router;  
