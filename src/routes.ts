@@ -22,6 +22,7 @@ import { ListProductController } from "../src/controllers/product/ListByCategory
 //-- Importando o controlador das Orders
 import {CreateOrderController} from "../src/controllers/order/CreateOrderController";
 import { DeleteOrderController } from './controllers/order/DeleteOrderController';
+import { AddItensController } from './controllers/order/AddItensController';
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./temp"));
@@ -48,6 +49,8 @@ router.get("/product/category", IsAuthenticated, new ListProductController().han
 router.post("/order", IsAuthenticated, new CreateOrderController().handle)
 //-- Rota para deletar ordens
 router.delete("/order", IsAuthenticated, new DeleteOrderController().handle)
+//-- Rota para adicionar item
+router.post("/order/addItem", IsAuthenticated, new AddItensController().handle)
 
 
 
